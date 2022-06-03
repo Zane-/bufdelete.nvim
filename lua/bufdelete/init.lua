@@ -5,7 +5,8 @@ local M = {}
 
 -- Common kill function for bdelete and bwipeout
 local function buf_kill(kill_command, bufnr, force)
-    if vim.api.nvim_buf_get_option(bufnr, 'filetype') == 'alpha' then
+    local ft = vim.api.nvim_buf_get_option(bufnr, 'filetype')
+    if  ft == 'alpha' or ft == 'Outline' or string.match(ft, 'dap') then
         return
     end
     -- If buffer is modified and force isn't true, print error and abort
